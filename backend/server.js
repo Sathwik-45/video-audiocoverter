@@ -7,6 +7,15 @@ const path = require("path");
 
 const app = express();
 app.use(cors());
+// Root route (important for Render)
+app.get("/", (req, res) => {
+  res.send("Video to Audio Converter API is running");
+});
+
+// Health check (very important)
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
 
 // storage for uploaded files
 const upload = multer({
