@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video to Audio Converter</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <h1>🎵 Video to Audio Converter</h1>
+  <p>Convert your local video files to MP3</p>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="container">
+  <div class="card">
+
+    <div class="upload-box">
+      <input type="file" id="videoFile" accept="video/*" hidden />
+      <p>Select a video file</p>
+      <span>MP4, MKV, AVI supported</span>
+      <button type="button" onclick="selectFile()">Choose Video</button>
+    </div>
+
+    <button type="button" class="convert-btn" onclick="upload()" disabled>
+      Convert to MP3
+    </button>
+
+    <div id="status"></div>
+  </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <a href="#" onclick="openModal('aboutModal')">About</a>
+  <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a>
+  <a href="#" onclick="openModal('contactModal')">Contact</a>
+</footer>
+
+<!-- ================= MODALS ================= -->
+
+<div class="modal" id="aboutModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+    <h2>About Us</h2>
+    <p>
+      Video to Audio Converter is a simple online tool that allows users
+      to extract audio from their own video files.
+    </p>
+    <p>
+      This tool works only with locally uploaded files and does not support
+      downloading or converting videos from external platforms.
+    </p>
+  </div>
+</div>
+
+<div class="modal" id="privacyModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+    <h2>Privacy Policy</h2>
+    <p>
+      Uploaded files are processed temporarily only for conversion purposes
+      and are automatically deleted after processing.
+    </p>
+    <p>
+      We do not collect personal information such as name, email, or phone number.
+    </p>
+  </div>
+</div>
+
+<div class="modal" id="contactModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('contactModal')">&times;</span>
+    <h2>Contact</h2>
+    <p>
+      For questions or feedback, contact us at:
+    </p>
+    <p><b>Email:</b> shockytipps@gmail.com</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

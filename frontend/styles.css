@@ -1,0 +1,206 @@
+/* ================= RESET ================= */
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* ================= BODY LAYOUT ================= */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #f6f8fa, #eef2f7);
+  color: #222;
+}
+
+/* ================= HEADER ================= */
+.header {
+  text-align: center;
+  padding: 24px 14px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #fff;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.header p {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* ================= MAIN CONTAINER ================= */
+.container {
+  flex: 1; /* pushes footer down */
+  display: flex;
+  align-items: center;       /* 🔥 vertical center */
+  justify-content: center;   /* 🔥 horizontal center */
+  padding: 12px;
+}
+
+/* ================= CARD ================= */
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  padding: 22px 18px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+/* ================= UPLOAD BOX ================= */
+.upload-box {
+  border: 2px dashed #cbd5e1;
+  padding: 22px 14px;
+  border-radius: 12px;
+  transition: 0.2s ease;
+}
+
+.upload-box:hover {
+  background: #f8fafc;
+  border-color: #2563eb;
+}
+
+.upload-box p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.upload-box span {
+  display: block;
+  margin: 8px 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.upload-box button {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto 0;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= CONVERT BUTTON ================= */
+.convert-btn {
+  width: 100%;
+  max-width: 360px;
+  margin: 16px auto 0;
+  padding: 14px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.convert-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ================= STATUS ================= */
+#status {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.4;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  text-align: center;
+  padding: 14px 10px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.footer a {
+  margin: 0 8px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ================= MODALS ================= */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  width: 92%;
+  max-width: 480px;
+  max-height: 85vh;
+  padding: 20px;
+  border-radius: 12px;
+  overflow-y: auto;
+}
+
+.close {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+  color: #64748b;
+}
+
+/* ================= DESKTOP ADJUSTMENT ================= */
+@media (min-width: 768px) {
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 28px 24px;
+  }
+
+  .upload-box p {
+    font-size: 15px;
+  }
+
+  .convert-btn {
+    font-size: 16px;
+  }
+}
+/* ================= BUTTON STATES ================= */
+
+/* Ready to convert */
+.convert-btn.ready {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  opacity: 1;
+}
+
+/* While converting */
+.convert-btn.loading {
+  background: linear-gradient(135deg, #86efac, #4ade80);
+  cursor: wait;
+}
+
+/* After success */
+.convert-btn.done {
+  background: linear-gradient(135deg, #15803d, #16a34a);
+}
