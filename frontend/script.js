@@ -33,25 +33,50 @@ async function upload() {
   const file = fileInput.files[0];
   if (!file) return;
 
+  // Disable interactions
   convertBtn.disabled = true;
+  fileInput.disabled = true;
+
   convertBtn.classList.remove("ready", "done");
   convertBtn.classList.add("loading");
 
-  statusText.innerHTML = "⏳ Converting video to audio...";
+  statusText.innerHTML = "⏳ Uploading & processing video…";
+
+  // Progress bar setup
+  const progressWrapper = document.getElementById("progressWrapper");
+  const progressBar = document.getElementById("progressBar");
+
+  progressWrapper.style.display = "block";
+  progressBar.style.width = "10%";
 
   const formData = new FormData();
   formData.append("video", file);
 
+  // Fake progress (UX improvement)
+  let fakeProgress = 10;
+  const progressInterval = setInterval(() => {
+    if (fakeProgress < 90) {
+      fakeProgress += Math.random() * 8;
+      progressBar.style.width = `${fakeProgress}%`;
+    }
+  }, 800);
+
   try {
-    const res = await fetch("http://localhost:5000/convert", {
-      method: "POST",
-      body: formData
-    });
+    const res = await fetch(
+      "https://video-audiocoverter.onrender.com/convert",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
 
     if (!res.ok) throw new Error("Conversion failed");
 
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
+
+    clearInterval(progressInterval);
+    progressBar.style.width = "100%";
 
     const downloadBtn = document.createElement("a");
     downloadBtn.href = url;
@@ -64,21 +89,33 @@ async function upload() {
     downloadBtn.style.color = "#fff";
     downloadBtn.style.borderRadius = "6px";
     downloadBtn.style.textDecoration = "none";
+    downloadBtn.style.fontWeight = "600";
 
-    statusText.innerHTML = "✅ Conversion completed<br>";
+    statusText.innerHTML = "✅ Conversion completed successfully<br>";
     statusText.appendChild(downloadBtn);
 
-    convertBtn.disabled = false;
     convertBtn.classList.remove("loading");
     convertBtn.classList.add("done");
 
   } catch (err) {
-    statusText.innerHTML = "❌ Conversion failed";
-    convertBtn.disabled = false;
+    clearInterval(progressInterval);
+
+    statusText.innerHTML = "❌ Conversion failed. Please try again.";
+
     convertBtn.classList.remove("loading");
     convertBtn.classList.add("ready");
+  } finally {
+    // Re-enable interactions
+    convertBtn.disabled = false;
+    fileInput.disabled = false;
+
+    setTimeout(() => {
+      document.getElementById("progressWrapper").style.display = "none";
+      document.getElementById("progressBar").style.width = "0%";
+    }, 1500);
   }
 }
+
 
 /* MODALS */
 function openModal(id) {
