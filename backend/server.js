@@ -7,60 +7,62 @@ const path = require("path");
 
 const app = express();
 app.use(cors());
-// Root route (important for Render)
+
+// 🔧 IMPORTANT: set ffmpeg path for Render
+ffmpeg.setFfmpegPath("/usr/bin/ffmpeg");
+
+// Root route
 app.get("/", (req, res) => {
   res.send("Video to Audio Converter API is running");
 });
 
-// Health check (very important)
+// Health check
 app.get("/health", (req, res) => {
   res.status(200).send("OK");
 });
 
-// storage for uploaded files
+// Multer config (50MB limit)
 const upload = multer({
   dest: "uploads/",
   limits: {
-    fileSize: 50 * 1024 * 1024 // ✅ 50 MB
+    fileSize: 50 * 1024 * 1024,
   },
 });
 
-// convert video to audio
-app.post("/convert", (req, res) => {
-  upload.single("video")(req, res, (err) => {
+// Convert video to MP3
+app.post("/convert", upload.single("video"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
 
-    if (err) {
-      if (err.code === "LIMIT_FILE_SIZE") {
-        return res.status(400).json({
-          error: "File too large. Max allowed size is 50 MB."
-        });
-      }
-      return res.status(500).json({ error: "Upload error" });
-    }
+  const inputPath = req.file.path;
+  const outputPath = `${inputPath}.mp3`;
 
-    if (!req.file) {
-      return res.status(400).json({ error: "No file uploaded" });
-    }
-
-    const inputPath = req.file.path;
-    const outputPath = `${inputPath}.mp3`;
-
-    ffmpeg(inputPath)
-      .toFormat("mp3")
-      .on("end", () => {
-        res.download(outputPath, "audio.mp3", () => {
-          fs.unlinkSync(inputPath);
-          fs.unlinkSync(outputPath);
-        });
-      })
-      .on("error", () => {
-        res.status(500).json({ error: "Conversion failed" });
-      })
-      .save(outputPath);
-  });
+  ffmpeg(inputPath)
+    .noVideo()
+    .audioCodec("libmp3lame")
+    .audioBitrate("128k")        // ✅ Faster, good quality
+    .outputOptions([
+      "-preset veryfast",        // ✅ Speed boost
+      "-vn"
+    ])
+    .on("end", () => {
+      res.download(outputPath, "audio.mp3", (err) => {
+        // cleanup
+        fs.unlink(inputPath, () => {});
+        fs.unlink(outputPath, () => {});
+      });
+    })
+    .on("error", (err) => {
+      console.error("FFmpeg error:", err.message);
+      fs.unlink(inputPath, () => {});
+      return res.status(500).json({ error: "Conversion failed" });
+    })
+    .save(outputPath);
 });
 
-
-app.listen(5000, () => {
-  console.log("✅ Backend running on http://localhost:5000");
+// Use Render PORT
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`✅ Backend running on port ${PORT}`);
 });

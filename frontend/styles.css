@@ -12,8 +12,6 @@ html, body {
 body {
   margin: 0;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   background: linear-gradient(180deg, #f6f8fa, #eef2f7);
   color: #222;
 }
@@ -39,12 +37,11 @@ body {
 
 /* ================= MAIN CONTAINER ================= */
 .container {
-  flex: 1; /* pushes footer down */
   display: flex;
-  align-items: center;       /* 🔥 vertical center */
-  justify-content: center;   /* 🔥 horizontal center */
-  padding: 12px;
+  justify-content: center;
+  padding: 24px 12px;
 }
+
 
 /* ================= CARD ================= */
 .card {
@@ -126,11 +123,14 @@ body {
 
 /* ================= FOOTER ================= */
 .footer {
+  display: block;
+  width: 100%;
   text-align: center;
-  padding: 14px 10px;
-  font-size: 12px;
-  color: #64748b;
+  margin-top: 40px;
+  padding: 16px 8px;
+  background: transparent;
 }
+
 
 .footer a {
   margin: 0 8px;
@@ -220,4 +220,21 @@ body {
 /* After success */
 .convert-btn.done {
   background: linear-gradient(135deg, #15803d, #16a34a);
+}
+/* ===== FORCE FOOTER DEBUG ===== */
+.footer {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  background: #0f172a !important;
+  color: white !important;
+  padding: 20px 10px !important;
+  text-align: center !important;
+  margin-top: 40px !important;
+  border-top: 3px solid red !important;
+}
+
+.footer a {
+  color: #38bdf8 !important;
+  font-weight: 600 !important;
 }
