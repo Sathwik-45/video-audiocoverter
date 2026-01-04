@@ -4,21 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="sAs-CRIMVoRC7wiHH28LR09USsUjV35OJdp5mMUc4QI" />
 
-  <title>Video to Audio Converter</title>
-  <meta name="description" content="Convert video to MP3 audio online for free. Supports MP4, MKV, MOV and more." />
+  <!-- SEO TITLE -->
+  <title>Convert Video Under 50MB to Audio Online | Free MP3 Converter</title>
+
+  <!-- SEO DESCRIPTION -->
+  <meta
+    name="description"
+    content="Convert video files under 50MB to MP3 audio online for free. Fast video to audio converter for small videos, screen recordings, and clips."
+  />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 
 <body>
 
 <!-- ================= HEADER ================= -->
 <header class="header">
-  <h1>🎵 Video to Audio Converter</h1>
-  <p>Convert your local video files to MP3</p>
+  <h1>Convert Video Under 50MB to Audio</h1>
+  <p>Fast & free MP3 converter for small video files</p>
 </header>
 
 <!-- ================= MAIN ================= -->
@@ -28,20 +34,51 @@
     <div class="upload-box">
       <input type="file" id="videoFile" accept="video/*" hidden />
       <p>Select a video file</p>
-      <span>MP4, MKV, AVI supported</span>
+      <span>MP4, MKV, AVI supported (Max 50MB)</span>
       <button type="button" onclick="selectFile()">Choose Video</button>
     </div>
 
     <button type="button" class="convert-btn" onclick="upload()" disabled>
       Convert to MP3
     </button>
+
     <div class="progress-wrapper" id="progressWrapper">
-  <div class="progress-bar" id="progressBar"></div>
-</div>
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
     <div id="status"></div>
   </div>
 </main>
+
+<!-- ================= SEO CONTENT ================= -->
+<section style="max-width:700px;margin:40px auto;padding:0 16px;font-size:14px;line-height:1.6;color:#475569;">
+  <h2>Convert Small Video Files to Audio</h2>
+  <p>
+    This free online tool allows you to convert video files under 50MB into
+    high-quality MP3 audio. It is optimized for small videos to ensure
+    faster and more reliable conversion.
+  </p>
+
+  <h2>Why Use a 50MB Video to Audio Converter?</h2>
+  <p>
+    Smaller video files convert faster and work better on online tools.
+    This converter is ideal for short clips, screen recordings, lecture videos,
+    and presentations under 50MB.
+  </p>
+
+  <h3>Common Use Cases</h3>
+  <ul>
+    <li>Convert screen recordings to audio</li>
+    <li>Extract audio from short video clips</li>
+    <li>Convert lecture videos under 50MB</li>
+    <li>Fast MP3 conversion without signup</li>
+  </ul>
+
+  <p style="font-size:12px;color:#64748b;margin-top:16px;">
+    ⚠️ This tool is intended for converting video files that you own or have
+    permission to use. Users are responsible for complying with copyright laws.
+  </p>
+</section>
 
 <!-- ================= FOOTER ================= -->
 <footer class="footer">
@@ -57,12 +94,12 @@
     <span class="close" onclick="closeModal('aboutModal')">&times;</span>
     <h2>About Us</h2>
     <p>
-      Video to Audio Converter is a simple online tool that allows users
-      to extract audio from their own video files.
+      This video to audio converter helps users extract MP3 audio from
+      small video files under 50MB.
     </p>
     <p>
-      This tool works only with locally uploaded files and does not support
-      downloading or converting videos from external platforms.
+      The tool works only with locally uploaded files and does not support
+      downloading videos from external platforms.
     </p>
   </div>
 </div>
@@ -72,8 +109,8 @@
     <span class="close" onclick="closeModal('privacyModal')">&times;</span>
     <h2>Privacy Policy</h2>
     <p>
-      Uploaded files are processed temporarily only for conversion purposes
-      and are automatically deleted after processing.
+      Uploaded files are processed temporarily for conversion purposes
+      and are deleted automatically after processing.
     </p>
     <p>
       We do not collect personal information such as name, email, or phone number.
@@ -85,9 +122,7 @@
   <div class="modal-content">
     <span class="close" onclick="closeModal('contactModal')">&times;</span>
     <h2>Contact</h2>
-    <p>
-      For questions or feedback, contact us at:
-    </p>
+    <p>For questions or feedback, contact us at:</p>
     <p><b>Email:</b> shockytipps@gmail.com</p>
   </div>
 </div>
